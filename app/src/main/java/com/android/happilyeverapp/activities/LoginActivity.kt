@@ -2,7 +2,6 @@ package com.android.happilyeverapp.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,10 +27,12 @@ class LoginActivity : AppCompatActivity() {
         btn_login.setOnClickListener {
             val email = R.id.login_email.toString()
             val pwd = R.id.login_password.toString()
-
-            if(!inputCheck(email, pwd)){
+            val bool = inputCheck(email, pwd)
+            println("Input "+bool)
+//            if(bool){
                 val user: User = viewModel.login(email, pwd)
-                if( user == null) {
+                println(user)
+                if( user.email == null) {
                     Toast.makeText(this, "Check Credentials or Sign up", Toast.LENGTH_LONG).show()
                 }
                 else {
@@ -39,13 +40,14 @@ class LoginActivity : AppCompatActivity() {
                     val intent: Intent = Intent(this, ProfileQuickActivity::class.java).putExtra("email", email)
                     startActivity(intent)
                 }
-            }
-            else {
-                Toast.makeText(this, "Fill all fields", Toast.LENGTH_LONG).show()
-            }
+//            }
+//            else {
+//                Toast.makeText(this, "Fill all fields", Toast.LENGTH_LONG).show()
+//            }
         }
     }
     private fun inputCheck(email:String, pwd: String): Boolean {
-        return (TextUtils.isEmpty(email) && TextUtils.isEmpty(pwd))
+        if(email.length>0 && pwd.length>0) return true
+        return false
     }
 }
