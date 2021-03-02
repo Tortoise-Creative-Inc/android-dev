@@ -17,11 +17,14 @@ class ProfileQuickActivity : AppCompatActivity() {
         setContentView(R.layout.profilequick)
 
         var viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        val email: String = intent.getStringExtra("email").toString()
-        var user = viewModel.getUser(email)
+//        val id: Long = intent.getStringExtra("id")!!.toLong()
+        val id: Long = intent.getLongExtra("id", 0)
+        var user = viewModel.getUsers()
+
+        println(user.value) //prints null
 
         val name :TextView = findViewById(R.id.usersname)
-        name.text = user.name
+//        name.text = user.name
 
         val editText: EditText = findViewById(R.id.age)
 
@@ -47,18 +50,18 @@ class ProfileQuickActivity : AppCompatActivity() {
 
         val btn_submit: Button = findViewById(R.id.btn_submit_quick)
         btn_submit.setOnClickListener {
-            user.age = R.id.age.toInt()
-            user.location = R.id.location.toString()
-            user.religion = R.id.religion.toString()
-            user.height = R.id.height.toFloat()
-            user.education = R.id.education.toString()
-            user.maritalStatus = R.id.marital_status.toString()
-            user.parents = R.id.parents.toString()
-            user.brothers = R.id.brothers.toInt()
-            user.sisters = R.id.sisters.toInt()
+//            user.age = R.id.age.toInt()
+//            user.location = R.id.location.toString()
+//            user.religion = R.id.religion.toString()
+//            user.height = R.id.height.toFloat()
+//            user.education = R.id.education.toString()
+//            user.maritalStatus = R.id.marital_status.toString()
+//            user.parents = R.id.parents.toString()
+//            user.brothers = R.id.brothers.toInt()
+//            user.sisters = R.id.sisters.toInt()
 
             var viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-            viewModel.updateProfile(user)
+//            viewModel.updateProfile(user)
 
             Toast.makeText(this, "Profile Updated", Toast.LENGTH_LONG).show()
         }
